@@ -1,7 +1,6 @@
 package games
 
 class SixNeighbors extends GameOfLife {
-
 	def play() {
 		for(i <- 0 to size-1) {
 			for(j <- 0 to size-1) {
@@ -11,20 +10,16 @@ class SixNeighbors extends GameOfLife {
 				aliveNeighborsCount += processNeighbor(i+1, j)
 				aliveNeighborsCount += processNeighbor(i, j-1)
 				aliveNeighborsCount += processNeighbor(i, j+1)
-				var J = j-1
-				if(i%2 != 0) 
-					J = j+1
-				aliveNeighborsCount += processNeighbor(i-1, J)
-				aliveNeighborsCount += processNeighbor(i+1, J)	
+				var col = if(i%2 != 0) j+1 else j-1
+				aliveNeighborsCount += processNeighbor(i-1, col)
+				aliveNeighborsCount += processNeighbor(i+1, col)	
 				print(aliveNeighborsCount + " ")
 				if(grid(i)(j)) {		//Alive cell
 					if(aliveNeighborsCount < 2 || aliveNeighborsCount > 3)
-						nextGenGrid(i)(j) = false	
+						nextGenGrid(i)(j) = false
 				}
-				else {					//Dead cell
-					if(aliveNeighborsCount == 3)
-						nextGenGrid(i)(j) = true
-				}
+				else 					//Dead cell
+						nextGenGrid(i)(j) = (aliveNeighborsCount == 3)
 			}
 			print("| ")
 		}
