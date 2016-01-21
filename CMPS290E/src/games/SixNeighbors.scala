@@ -1,5 +1,7 @@
 package games
-
+/* 
+ * This class implements play() method of GameOfLife for 6 neighbor version of the game.
+ */
 class SixNeighbors extends GameOfLife {
 	def play() {
 		for(i <- 0 to size-1) {
